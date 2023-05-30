@@ -1,0 +1,19 @@
+.main{
+    display: flex;
+    color: #FFFFFF;
+    margin-left: 15%;
+}
+.part{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.part2{
+    width: 50%;
+}
+.center{
+    text-align: center;
+}

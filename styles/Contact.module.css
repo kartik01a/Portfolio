@@ -1,0 +1,44 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    margin-left: 12%;
+    color: #FFFFFF;
+    padding: .5rem 3%;
+}
+.hrheading{
+    position: relative;
+    animation: animate .5s linear 1;
+}
+.heading{
+    position: absolute;
+    left: 45%;
+    background-color: rgb(29,29,29);
+    padding: 0 1.6rem;
+}
+.hr{
+    position: absolute;
+    width: 100%;
+    top: 2rem;
+}
+.main2{
+    display: inline;
+    margin: 5rem;
+}
+.details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 1rem 2rem;
+}
+.details1{
+    padding: 0 2rem;
+}
+@keyframes animate{
+    from{
+        top:-1rem;
+    }
+    to{
+        top:0rem;
+    }
+}
