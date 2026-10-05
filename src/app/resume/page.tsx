@@ -24,7 +24,7 @@ export default function ResumePage() {
     <Container className="py-16">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
-          <h1 className="font-display text-5xl">{site.name}</h1>
+          <h1 className="font-display text-5xl text-ink">{site.name}</h1>
           <p className="mt-2 text-secondary">{site.role}</p>
           <p className="mt-1 text-sm text-muted">
             {site.location} · {site.timezoneLabel}

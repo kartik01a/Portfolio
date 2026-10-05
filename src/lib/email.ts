@@ -4,6 +4,10 @@ import type { BriefInput } from "@/lib/validation";
 export async function sendBriefEmail(brief: BriefInput) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL ?? "hello@kartiksinghbisht.com";
+  if (process.env.CONTACT_EMAIL_MODE === "test" && process.env.NODE_ENV !== "production") {
+    return { ok: true as const };
+  }
+
   if (!apiKey) {
     return { ok: false as const, error: "Email is not configured yet." };
   }

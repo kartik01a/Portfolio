@@ -4,7 +4,7 @@ import { calUrl, site } from "@/content/site";
 export function BookingPanel() {
   const url = calUrl();
   return (
-    <section id="book" className="scroll-mt-24 border border-border bg-surface p-6">
+    <section id="book" className="scroll-mt-24 rounded-2xl border border-border bg-surface p-6">
       <h2 className="font-display text-3xl">Book a 30-min call</h2>
       <p className="mt-3 text-secondary">
         {site.location} ({site.timezoneLabel}). {site.replyTime}. Slots are shown in your local timezone.

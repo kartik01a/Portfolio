@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
-import { detailProjects } from "@/content/projects";
+import { detailProjects, type Project } from "@/content/projects";
+import { skills } from "@/content/stack";
 import type { Metadata } from "next";
 
 export function absoluteUrl(path: string) {
@@ -53,13 +54,57 @@ export function personJsonLd() {
         addressCountry: "IN",
       },
     },
+    image: absoluteUrl("/images/profile/kartik.png"),
+    knowsAbout: [...skills],
+    alumniOf: {
+      "@type": "Organization",
+      name: "75way Technologies",
+    },
     sameAs: [
       site.links.linkedin,
       site.links.github,
       site.links.upwork,
       site.links.x,
       site.links.youtube,
+      site.links.devto,
     ],
+  };
+}
+
+export function profilePageJsonLd() {
+  const person = personJsonLd();
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: absoluteUrl("/about"),
+    mainEntity: { ...person, "@context": undefined },
+  };
+}
+
+export function breadcrumbJsonLd(project: Pick<Project, "name" | "slug">) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Work", item: absoluteUrl("/work") },
+      { "@type": "ListItem", position: 3, name: project.name, item: absoluteUrl(`/work/${project.slug}`) },
+    ],
+  };
+}
+
+export function professionalServiceJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: `${site.name} — full-stack development`,
+    url: absoluteUrl("/services"),
+    areaServed: "Worldwide",
+    provider: {
+      "@type": "Person",
+      name: site.name,
+      url: site.url,
+    },
   };
 }
 

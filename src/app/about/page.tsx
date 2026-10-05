@@ -1,25 +1,36 @@
+import { ExperienceTimeline } from "@/components/about/experience-timeline";
 import { Container } from "@/components/layout/container";
 import { Portrait } from "@/components/hero/portrait";
+import { Card } from "@/components/ui/card";
 import { experience } from "@/content/experience";
 import { getProject } from "@/content/projects";
 import { site } from "@/content/site";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, profilePageJsonLd } from "@/lib/seo";
 import Link from "next/link";
 
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "Kartik Singh Bisht is a full-stack developer in Chandigarh, India. Freelance on Upwork since 2025, previously an associate software developer at 75way Technologies.",
+    "Kartik Singh Bisht is a Next.js and full-stack developer in India. Freelance on Upwork since 2025, previously an associate software developer at 75way Technologies.",
   path: "/about",
 });
 
 export default function AboutPage() {
+  const roles = experience.map((role) => ({
+    ...role,
+    projects: role.projectSlugs.flatMap((slug) => {
+      const project = getProject(slug);
+      return project ? [{ slug, name: project.name }] : [];
+    }),
+  }));
+
   return (
     <Container className="py-16">
       <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16">
         <div className="contents lg:block lg:min-w-0 lg:flex-1">
           <div>
-            <h1 className="font-display text-5xl md:text-6xl">About</h1>
+            <p className="font-mono text-xs tracking-[0.16em] text-muted uppercase">About</p>
+            <h1 className="mt-3 font-display text-5xl text-ink md:text-6xl">About</h1>
             <p className="mt-6 text-secondary">
               I&apos;m {site.shortName}, a full-stack developer in {site.location} ({site.timezoneLabel}). I work on
               production web applications: frontend, backend, integrations, and deployment. Independent products and
@@ -28,37 +39,10 @@ export default function AboutPage() {
           </div>
 
           <section className="order-3 mt-16 lg:order-none" aria-labelledby="experience">
-        <h2 id="experience" className="font-display text-4xl">
-          Experience
-        </h2>
-        <ol className="mt-8 space-y-10 border-l border-border pl-6">
-          {experience.map((role) => (
-            <li key={role.company}>
-              <p className="font-mono text-xs text-muted">{role.dates}</p>
-              <h3 className="mt-1 font-display text-2xl">{role.role}</h3>
-              <p className="text-secondary">{role.company}</p>
-              <p className="mt-3 max-w-2xl text-secondary">{role.summary}</p>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-secondary">
-                {role.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <ul className="mt-3 flex flex-wrap gap-3 text-sm">
-                {role.projectSlugs.map((slug) => {
-                  const project = getProject(slug);
-                  if (!project) return null;
-                  return (
-                    <li key={slug}>
-                      <Link href={`/work/${slug}`} className="text-accent">
-                        {project.name}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-          ))}
-        </ol>
+            <h2 id="experience" className="font-display text-4xl text-ink">
+              Experience
+            </h2>
+            <ExperienceTimeline roles={roles} />
           </section>
         </div>
         <div className="order-2 mt-10 lg:order-none lg:mt-0 lg:w-[340px] lg:shrink-0">
@@ -66,8 +50,8 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <section className="mt-16 max-w-2xl" aria-labelledby="roles">
-        <h2 id="roles" className="font-display text-4xl">
+      <Card className="mt-16 max-w-2xl p-6">
+        <h2 id="roles" className="font-display text-4xl text-ink">
           Open to full-time roles
         </h2>
         {site.openToFullTime ? (
@@ -85,10 +69,10 @@ export default function AboutPage() {
             LinkedIn
           </a>
         </p>
-      </section>
+      </Card>
 
       <section className="mt-16 max-w-2xl" aria-labelledby="focus">
-        <h2 id="focus" className="font-display text-4xl">
+        <h2 id="focus" className="font-display text-4xl text-ink">
           Current focus
         </h2>
         <p className="mt-4 text-secondary">
@@ -98,7 +82,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-16 max-w-2xl" aria-labelledby="beyond">
-        <h2 id="beyond" className="font-display text-4xl">
+        <h2 id="beyond" className="font-display text-4xl text-ink">
           Beyond code
         </h2>
         <p className="mt-4 text-secondary">
@@ -113,6 +97,7 @@ export default function AboutPage() {
           .
         </p>
       </section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd()) }} />
     </Container>
   );
 }

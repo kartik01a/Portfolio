@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Now",
-  description: `What Kartik Singh Bisht is building, learning, and open to. ${site.availability}.`,
+  description: `What Kartik Singh Bisht, a Next.js and full-stack developer in India, is building, learning, and open to. ${site.availability}.`,
   path: "/now",
 });
 

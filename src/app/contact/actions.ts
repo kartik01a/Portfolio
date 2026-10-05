@@ -5,25 +5,30 @@ import { sendBriefEmail } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit";
 import { briefSchema } from "@/lib/validation";
 
+function clientIp(headerList: { get(name: string): string | null }) {
+  return headerList.get("x-real-ip")?.trim() || headerList.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+}
+
 async function verifyTurnstile(token: string, ip: string) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      return false;
-    }
-    return true;
+    return process.env.NODE_ENV !== "production";
   }
-  const body = new URLSearchParams({
-    secret,
-    response: token,
-    remoteip: ip,
-  });
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    body,
-  });
-  const data = (await response.json()) as { success?: boolean };
-  return Boolean(data.success);
+  try {
+    const body = new URLSearchParams({
+      secret,
+      response: token,
+      remoteip: ip,
+    });
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+    });
+    const data = (await response.json()) as { success?: boolean };
+    return Boolean(data.success);
+  } catch {
+    return false;
+  }
 }
 
 export async function sendProjectBrief(formData: FormData) {
@@ -48,7 +53,7 @@ export async function sendProjectBrief(formData: FormData) {
   }
 
   const headerList = await headers();
-  const ip = headerList.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+  const ip = clientIp(headerList);
   const limit = rateLimit(ip);
   if (!limit.ok) {
     return { ok: false as const, error: "Too many messages. Please email instead." };

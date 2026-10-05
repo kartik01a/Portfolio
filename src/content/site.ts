@@ -13,7 +13,8 @@ export const site = {
   remotePreference: "Open to remote roles",
   noticePeriod: "Shared on request",
   description:
-    "Full-stack and AI developer building production-ready SaaS, web applications and AI-powered automations with Next.js, React, Node.js and modern cloud technologies.",
+    "Next.js developer and full-stack developer in India. Kartik Singh Bisht builds production SaaS, web applications, and AI features. Hire on Upwork or book a call.",
+  contentUpdatedAt: "2026-10-05",
   eyebrow: "Full-stack + AI developer · Chandigarh, India (IST)",
   headline:
     "I build and ship SaaS products end to end: frontend, backend, integrations and AI.",
@@ -27,6 +28,8 @@ export const site = {
     rating: "5.0",
     reviewCount: 5,
     topRated: true,
+    jobs: "6",
+    hours: "1K+",
   },
   links: {
     upwork: "https://www.upwork.com/freelancers/~01e74ab725bfcfa302",

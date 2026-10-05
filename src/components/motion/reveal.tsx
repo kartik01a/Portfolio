@@ -1,18 +1,29 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-export function FadeIn({ children, className }: { children: ReactNode; className?: string }) {
+export function Reveal({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 12 }}
+      data-reveal
+      className={cn(className)}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      transition={{ duration: 0.45, delay, ease: "easeOut" }}
     >
       {children}
     </motion.div>

@@ -21,6 +21,9 @@ export type Project = {
   outcome?: string[];
   diagram?: string[];
   confidential?: boolean;
+  updatedAt: string;
+  cover?: { src: string; alt: string };
+  gallery?: { src: string; alt: string }[];
   seoTitle: string;
   seoDescription: string;
 };
@@ -35,9 +38,10 @@ export const projects: Project[] = [
     year: "Apr 2025 – Nov 2025",
     role: "Product engineer",
     ownership: "contributed",
-    caseStudy: "brief",
+    caseStudy: "full",
     status: "private",
     featured: true,
+    updatedAt: "2025-11-30",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "OpenAI APIs"],
     liveUrl: "https://www.brandradar.ai/",
     contribution: [
@@ -68,6 +72,7 @@ export const projects: Project[] = [
     caseStudy: "full",
     status: "private",
     featured: true,
+    updatedAt: "2026-06-01",
     technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "REST APIs"],
     liveUrl: "https://monudesk.com/",
     contribution: [
@@ -103,6 +108,7 @@ export const projects: Project[] = [
     caseStudy: "brief",
     status: "private",
     featured: true,
+    updatedAt: "2026-10-01",
     technologies: ["Web application", "Product workflows", "Integrations"],
     liveUrl: "https://www.optimate.fi/",
     contribution: [
@@ -129,6 +135,7 @@ export const projects: Project[] = [
     caseStudy: "full",
     status: "live",
     featured: true,
+    updatedAt: "2026-10-01",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://toolmorph.in/",
     contribution: [
@@ -167,6 +174,7 @@ export const projects: Project[] = [
     caseStudy: "brief",
     status: "private",
     featured: true,
+    updatedAt: "2024-12-31",
     technologies: ["React", "JavaScript", "Google Sheets", "REST APIs"],
     liveUrl: "https://www.inception.financial/",
     contribution: [
@@ -205,7 +213,7 @@ export function detailProjects() {
 }
 
 export function adjacentProjects(slug: string) {
-  const list = projects.filter((project) => project.caseStudy === "full");
+  const list = detailProjects();
   const index = list.findIndex((project) => project.slug === slug);
   if (index === -1) return { previous: undefined, next: undefined };
   return {

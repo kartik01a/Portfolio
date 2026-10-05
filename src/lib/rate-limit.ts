@@ -1,3 +1,7 @@
+/**
+ * Best-effort limit for a single server process. On Vercel each instance has its own map,
+ * so Turnstile is the real control. This only slows a burst against one instance.
+ */
 const hits = new Map<string, { count: number; resetAt: number }>();
 
 export function rateLimit(key: string, limit = 5, windowMs = 60 * 60 * 1000) {

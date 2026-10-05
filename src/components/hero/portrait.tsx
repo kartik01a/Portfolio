@@ -40,7 +40,7 @@ export function Portrait({
       height={large ? 1100 : 800}
       priority={priority}
       className={cn(
-        "h-auto w-full rounded-[18px] object-cover shadow-[0_12px_40px_rgba(17,19,24,0.08)]",
+        "h-auto w-full rounded-[18px] object-cover shadow-[0_12px_40px_var(--shadow)]",
         className,
       )}
     />

@@ -1,5 +1,8 @@
-import { ImageResponse } from "next/og";
+import { OgCard } from "@/lib/og-card";
 import { getProject } from "@/content/projects";
+import { ImageResponse } from "next/og";
+import fs from "node:fs";
+import path from "node:path";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -9,6 +12,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const project = getProject(slug);
   const title = project?.name ?? "Work";
   const subtitle = project?.shortDescription ?? "Kartik Singh Bisht";
+  const coverPath = path.join(process.cwd(), "public/images/projects", slug, "cover.webp");
+  const cover = fs.existsSync(coverPath)
+    ? `data:image/webp;base64,${fs.readFileSync(coverPath).toString("base64")}`
+    : null;
 
   return new ImageResponse(
     (
@@ -17,19 +24,22 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
           background: "#FAFAF7",
           color: "#111318",
-          padding: 72,
         }}
       >
-        <div style={{ fontSize: 24, color: "#5C6570" }}>Kartik Singh Bisht</div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 72, lineHeight: 1.05 }}>{title}</div>
-          <div style={{ marginTop: 16, fontSize: 28, color: "#596273" }}>{subtitle}</div>
+        <div style={{ display: "flex", flex: 1 }}>
+          <OgCard kicker="Kartik Singh Bisht" title={title} subtitle={subtitle} />
         </div>
-        <div style={{ fontSize: 22, color: "#1E3A8A" }}>UI → API → Data → Integrations</div>
+        {cover ? (
+          <img
+            alt=""
+            src={cover}
+            width={420}
+            height={630}
+            style={{ width: 420, height: 630, objectFit: "cover" }}
+          />
+        ) : null}
       </div>
     ),
     size,

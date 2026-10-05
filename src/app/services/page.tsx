@@ -9,23 +9,32 @@ import {
   whyPoints,
 } from "@/content/services";
 import { calUrl, site } from "@/content/site";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, professionalServiceJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { Boxes, Cable, Cloud, Cpu, LayoutDashboard, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = pageMetadata({
   title: "Services",
   description:
-    "Full-stack, SaaS, AI features, integrations, and deployment with Kartik Singh Bisht. One engineer across the product. Book a call or hire on Upwork.",
+    "Hire a Next.js and full-stack developer in India for SaaS, AI features, integrations, and deployment. Book a call or hire on Upwork.",
   path: "/services",
 });
+
+const groupIcons: Record<(typeof serviceGroups)[number]["title"], LucideIcon> = {
+  "Full-stack development": Boxes,
+  "SaaS development": LayoutDashboard,
+  "AI development": Cpu,
+  "API and integration development": Cable,
+  "Cloud and delivery": Cloud,
+};
 
 export default function ServicesPage() {
   const bookingHref = calUrl() || "/contact#book";
   return (
     <Container className="py-16">
       <p className="font-mono text-xs tracking-wide text-muted uppercase">Services</p>
-      <h1 className="mt-4 max-w-3xl font-display text-5xl leading-tight md:text-6xl">
+      <h1 className="mt-4 max-w-3xl font-display text-5xl leading-tight text-ink md:text-6xl">
         Need someone who can build the whole product?
       </h1>
       <p className="mt-5 max-w-2xl text-secondary">
@@ -49,33 +58,37 @@ export default function ServicesPage() {
       </div>
 
       <section className="mt-20" aria-labelledby="services-list">
-        <h2 id="services-list" className="font-display text-4xl">
+        <h2 id="services-list" className="font-display text-4xl text-ink">
           What I take on
         </h2>
-        <div className="mt-8 grid gap-10 md:grid-cols-2">
-          {serviceGroups.map((group) => (
-            <section key={group.title}>
-              <h3 className="font-display text-2xl">{group.title}</h3>
-              <ul className="mt-3 space-y-1 text-secondary">
-                {group.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              {"note" in group && group.note ? <p className="mt-3 text-sm text-muted">{group.note}</p> : null}
-            </section>
-          ))}
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {serviceGroups.map((group) => {
+            const Icon = groupIcons[group.title];
+            return (
+              <section key={group.title} className="rounded-2xl border border-border bg-surface p-6">
+                <Icon className="size-5 text-accent" aria-hidden />
+                <h3 className="mt-4 font-display text-2xl text-ink">{group.title}</h3>
+                <ul className="mt-3 space-y-1 text-secondary">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                {"note" in group && group.note ? <p className="mt-3 text-sm text-muted">{group.note}</p> : null}
+              </section>
+            );
+          })}
         </div>
       </section>
 
       <section className="mt-20" aria-labelledby="engagements">
-        <h2 id="engagements" className="font-display text-4xl">
+        <h2 id="engagements" className="font-display text-4xl text-ink">
           Engagement types
         </h2>
         <p className="mt-3 text-secondary">Project pricing depends on scope, complexity, and timeline.</p>
         <dl className="mt-8 divide-y divide-border border-y border-border">
           {engagementTypes.map((type) => (
             <div key={type.title} className="grid gap-2 py-5 md:grid-cols-12">
-              <dt className="font-display text-2xl md:col-span-4">{type.title}</dt>
+              <dt className="font-display text-2xl text-ink md:col-span-4">{type.title}</dt>
               <dd className="text-secondary md:col-span-8">{type.detail}</dd>
             </div>
           ))}
@@ -83,37 +96,48 @@ export default function ServicesPage() {
       </section>
 
       <section className="mt-20" aria-labelledby="process">
-        <h2 id="process" className="font-display text-4xl">
+        <h2 id="process" className="font-display text-4xl text-ink">
           How an engagement runs
         </h2>
         <p className="mt-3 text-secondary">
           {site.location} ({site.timezoneLabel}). {site.replyTime}.
         </p>
-        <ol className="mt-6 space-y-3">
+        <ol className="mt-8 grid gap-4 md:grid-cols-4">
           {engagementProcess.map((step, index) => (
-            <li key={step} className="text-ink">
-              <span className="font-mono text-xs text-muted">{index + 1}.</span> {step}
+            <li key={step} className="rounded-2xl border border-border bg-surface p-5">
+              <span className="font-mono text-xs text-accent">{String(index + 1).padStart(2, "0")}</span>
+              <p className="mt-3 text-ink">{step}</p>
             </li>
           ))}
         </ol>
       </section>
 
       <section className="mt-20" aria-labelledby="faq">
-        <h2 id="faq" className="font-display text-4xl">
+        <h2 id="faq" className="font-display text-4xl text-ink">
           Questions
         </h2>
-        <dl className="mt-8 space-y-8">
+        <div className="mt-8 divide-y divide-border border-y border-border">
           {faqs.map((faq) => (
-            <div key={faq.question}>
-              <dt className="font-medium">{faq.question}</dt>
-              <dd className="mt-2 text-secondary">{faq.answer}</dd>
-            </div>
+            <details key={faq.question} className="group py-4">
+              <summary className="cursor-pointer list-none font-medium text-ink [&::-webkit-details-marker]:hidden">
+                <span className="flex items-center justify-between gap-4">
+                  {faq.question}
+                  <span className="font-mono text-muted group-open:hidden" aria-hidden>
+                    +
+                  </span>
+                  <span className="hidden font-mono text-muted group-open:inline" aria-hidden>
+                    –
+                  </span>
+                </span>
+              </summary>
+              <p className="mt-3 max-w-2xl text-secondary">{faq.answer}</p>
+            </details>
           ))}
-        </dl>
+        </div>
       </section>
 
       <section className="mt-20" aria-labelledby="why">
-        <h2 id="why" className="font-display text-4xl">
+        <h2 id="why" className="font-display text-4xl text-ink">
           Why this scope
         </h2>
         <ul className="mt-6 max-w-2xl list-disc space-y-3 pl-5 text-secondary">
@@ -122,6 +146,10 @@ export default function ServicesPage() {
           ))}
         </ul>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd()) }}
+      />
     </Container>
   );
 }

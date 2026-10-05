@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 export default function PrivacyPage() {
   return (
     <Container className="prose-width py-16">
-      <h1 className="font-display text-5xl">Privacy</h1>
+      <h1 className="font-display text-5xl text-ink">Privacy</h1>
       <div className="mt-8 max-w-2xl space-y-6 text-secondary">
         <p>
           This site uses cookieless analytics (Vercel Analytics) to count page views and a few events: case study

@@ -16,7 +16,7 @@ export const briefSchema = z.object({
   budget: z.string().trim().max(120).optional().or(z.literal("")),
   timeline: z.string().trim().max(120).optional().or(z.literal("")),
   message: z.string().trim().min(10).max(5000),
-  honeypot: z.string().max(0),
+  honeypot: z.string(),
   turnstileToken: z.string().optional().or(z.literal("")),
 });
 
