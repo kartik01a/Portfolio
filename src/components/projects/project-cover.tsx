@@ -6,10 +6,10 @@ import { ViewTransition } from "react";
 
 function coverFile(project: Project) {
   if (project.cover) return project.cover;
-  const file = path.join(process.cwd(), "public/images/projects", project.slug, "cover.webp");
+  const file = path.join(process.cwd(), "public/images/projects", project.slug, "cover.png");
   if (!fs.existsSync(file)) return null;
   return {
-    src: `/images/projects/${project.slug}/cover.webp`,
+    src: `/images/projects/${project.slug}/cover.png`,
     alt: `${project.name} interface`,
   };
 }
@@ -22,9 +22,10 @@ export function ProjectCover({
   priority?: boolean;
 }) {
   const cover = coverFile(project);
+  console.log(cover,"cover")
   return (
     <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
-      <div className="relative aspect-[16/10] overflow-hidden bg-muted-surface">
+      <div className="relative aspect-[16/9] overflow-hidden bg-muted-surface">
         {cover ? (
           <Image
             src={cover.src}

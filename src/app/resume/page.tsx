@@ -32,7 +32,12 @@ export default function ResumePage() {
         </div>
         <div className="no-print flex flex-wrap gap-4 text-sm">
           {hasPdf ? (
-            <TrackedLink href="/resume/Kartik-Singh-Bisht-Resume.pdf" event="resume_download" className="text-accent">
+            <TrackedLink
+              href="/resume/Kartik-Singh-Bisht-Resume.pdf"
+              event="resume_download"
+              external
+              className="text-accent"
+            >
               Download PDF
             </TrackedLink>
           ) : null}
