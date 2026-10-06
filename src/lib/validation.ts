@@ -12,7 +12,7 @@ export const briefSchema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(200),
   company: z.string().trim().max(160).optional().or(z.literal("")),
-  projectType: z.enum(projectTypes),
+  projectType: z.enum(projectTypes).or(z.literal("")),
   budget: z.string().trim().max(120).optional().or(z.literal("")),
   timeline: z.string().trim().max(120).optional().or(z.literal("")),
   message: z.string().trim().min(10).max(5000),

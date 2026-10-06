@@ -31,6 +31,7 @@ export function SiteHeader() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const bookingHref = calUrl() || "/contact#book";
+  const bookingExternal = bookingHref.startsWith("http");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -94,6 +95,8 @@ export function SiteHeader() {
         <a
           href={bookingHref}
           className={cn(buttonVariants({ variant: "primary" }), "mt-6")}
+          target={bookingExternal ? "_blank" : undefined}
+          rel={bookingExternal ? "noreferrer" : undefined}
           onClick={() => {
             track("booking_started");
             setOpenPath(null);
@@ -140,6 +143,8 @@ export function SiteHeader() {
           <a
             href={bookingHref}
             className={cn(buttonVariants({ variant: "primary" }), "h-10")}
+            target={bookingExternal ? "_blank" : undefined}
+            rel={bookingExternal ? "noreferrer" : undefined}
             onClick={() => track("booking_started")}
           >
             Book a 30-min call

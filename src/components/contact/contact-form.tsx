@@ -15,7 +15,6 @@ const fieldClass =
 function fieldMessage(name: string, value: string) {
   if (name === "name" && value.trim().length < 2) return "Enter your name.";
   if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return "Enter a valid email.";
-  if (name === "projectType" && !value) return "Choose a project type.";
   if (name === "message" && value.trim().length < 10) return "Add a few sentences about the project.";
   return "";
 }
@@ -45,7 +44,7 @@ export function ContactForm() {
           const form = event.currentTarget;
           const data = new FormData(form);
           const nextErrors: Record<string, string> = {};
-          for (const name of ["name", "email", "projectType", "message"]) {
+          for (const name of ["name", "email", "message"]) {
             const message = fieldMessage(name, String(data.get(name) ?? ""));
             if (message) nextErrors[name] = message;
           }
@@ -91,18 +90,15 @@ export function ContactForm() {
           <input name="company" autoComplete="organization" className={fieldClass} />
         </label>
         <label className="block text-sm">
-          Project type
-          <select name="projectType" required defaultValue="" className={fieldClass} aria-invalid={Boolean(fieldErrors.projectType)}>
-            <option value="" disabled>
-              Select one
-            </option>
+          Project type <span className="text-muted">(optional)</span>
+          <select name="projectType" defaultValue="" className={fieldClass}>
+            <option value="">Select one</option>
             {projectTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
               </option>
             ))}
           </select>
-          {fieldErrors.projectType ? <span className="mt-1 block text-sm text-accent">{fieldErrors.projectType}</span> : null}
         </label>
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="block text-sm">

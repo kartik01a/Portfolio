@@ -76,7 +76,7 @@ export const faqs = [
   {
     question: "What timezone do you work in?",
     answer:
-      "India (IST, UTC+5:30). Bookable hours overlap EU morning (1:30–4:30 PM IST) and US East morning (6:30–9:30 PM IST), Monday to Friday.",
+      "India (IST, UTC+5:30). Bookable hours are 11:00 AM–5:00 PM IST and 6:30–9:00 PM IST, Monday to Friday. That covers EU morning and midday, and US East morning.",
   },
   {
     question: "How do we communicate?",

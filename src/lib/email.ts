@@ -3,7 +3,8 @@ import type { BriefInput } from "@/lib/validation";
 
 export async function sendBriefEmail(brief: BriefInput) {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_EMAIL ?? "hello@kartiksinghbisht.com";
+  const to = process.env.CONTACT_EMAIL ?? "kartiksinghbisht1@gmail.com";
+  const from = process.env.RESEND_FROM ?? "Kartik Singh Bisht <onboarding@resend.dev>";
   if (process.env.CONTACT_EMAIL_MODE === "test" && process.env.NODE_ENV !== "production") {
     return { ok: true as const };
   }
@@ -17,7 +18,7 @@ export async function sendBriefEmail(brief: BriefInput) {
     `Name: ${brief.name}`,
     `Email: ${brief.email}`,
     `Company: ${brief.company || "—"}`,
-    `Project type: ${brief.projectType}`,
+    `Project type: ${brief.projectType || "—"}`,
     `Budget: ${brief.budget || "—"}`,
     `Timeline: ${brief.timeline || "—"}`,
     "",
@@ -25,7 +26,7 @@ export async function sendBriefEmail(brief: BriefInput) {
   ];
 
   const { error } = await resend.emails.send({
-    from: "Portfolio <hello@kartiksinghbisht.com>",
+    from,
     to,
     replyTo: brief.email,
     subject: `New portfolio enquiry from ${brief.name}`,

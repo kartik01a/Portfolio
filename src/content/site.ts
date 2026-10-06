@@ -4,7 +4,7 @@ export const site = {
   wordmark: "Kartik.",
   role: "Full-Stack + AI Developer",
   url: "https://kartiksinghbisht.com",
-  email: "hello@kartiksinghbisht.com",
+  email: "kartiksinghbisht1@gmail.com",
   location: "Chandigarh, India",
   timezoneLabel: "IST, UTC+5:30",
   availability: "Taking one new project from November 2026",
@@ -21,8 +21,8 @@ export const site = {
   supporting:
     "I'm Kartik, a full-stack developer in Chandigarh, India (IST). I take products from an idea or an existing codebase through frontend, backend, integrations, AI features and production deployment.",
   bookingWindows: [
-    { label: "1:30–4:30 PM IST", audience: "EU morning" },
-    { label: "6:30–9:30 PM IST", audience: "US East morning" },
+    { label: "11:00 AM–5:00 PM IST", audience: "EU morning and midday" },
+    { label: "6:30–9:00 PM IST", audience: "US East morning" },
   ],
   upwork: {
     rating: "5.0",

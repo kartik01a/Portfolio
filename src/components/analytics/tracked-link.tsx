@@ -16,12 +16,13 @@ export function TrackedLink({
   children: ReactNode;
   external?: boolean;
 }) {
+  const opensNewTab = external || href.startsWith("http");
   return (
     <a
       href={href}
       className={className}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
+      target={opensNewTab ? "_blank" : undefined}
+      rel={opensNewTab ? "noreferrer" : undefined}
       onClick={() => track(event)}
     >
       {children}

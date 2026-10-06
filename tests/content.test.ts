@@ -22,6 +22,7 @@ describe("briefSchema", () => {
 
   it("accepts a valid brief and a filled honeypot", () => {
     expect(briefSchema.safeParse(valid).success).toBe(true);
+    expect(briefSchema.safeParse({ ...valid, projectType: "" }).success).toBe(true);
     expect(briefSchema.safeParse({ ...valid, honeypot: "https://spam.example" }).success).toBe(true);
   });
 
