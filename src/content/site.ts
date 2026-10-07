@@ -3,7 +3,7 @@ export const site = {
   shortName: "Kartik",
   wordmark: "Kartik.",
   role: "Full-Stack + AI Developer",
-  url: "https://kartiksinghbisht.com",
+  url: "https://kartik-portfolio-30081541625.asia-south1.run.app",
   email: "kartiksinghbisht1@gmail.com",
   location: "Chandigarh, India",
   timezoneLabel: "IST, UTC+5:30",

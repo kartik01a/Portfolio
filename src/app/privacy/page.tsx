@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Privacy",
-  description: "How kartiksinghbisht.com handles analytics, contact messages, and booking.",
+  description: "How this site handles analytics, contact messages, and booking.",
   path: "/privacy",
 });
 

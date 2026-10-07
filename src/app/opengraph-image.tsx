@@ -7,7 +7,7 @@ export const alt = "Kartik Singh Bisht, Next.js and full-stack developer in Indi
 
 export default function Image() {
   return new ImageResponse(
-    <OgCard kicker="kartiksinghbisht.com" title="Kartik Singh Bisht" subtitle="Next.js and full-stack developer" />,
+    <OgCard kicker="Kartik." title="Kartik Singh Bisht" subtitle="Next.js and full-stack developer" />,
     size,
   );
 }

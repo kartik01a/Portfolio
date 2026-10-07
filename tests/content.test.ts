@@ -1,4 +1,5 @@
 import { feedback } from "@/content/feedback";
+import { site } from "@/content/site";
 import { adjacentProjects, featuredProjects, projects } from "@/content/projects";
 import { pageMetadata } from "@/lib/seo";
 import { rateLimit } from "@/lib/rate-limit";
@@ -75,7 +76,7 @@ describe("pageMetadata", () => {
       description: "About Kartik.",
       path: "/about",
     });
-    expect(metadata.alternates?.canonical).toBe("https://kartiksinghbisht.com/about");
+    expect(metadata.alternates?.canonical).toBe(`${site.url}/about`);
   });
 });
 
