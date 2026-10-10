@@ -3,7 +3,7 @@
 import { sendProjectBrief } from "@/app/contact/actions";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { buttonVariants } from "@/components/ui/button";
-import { calUrl, site } from "@/content/site";
+import { site } from "@/content/site";
 import { projectTypes } from "@/lib/validation";
 import { cn } from "@/lib/utils";
 import { track } from "@vercel/analytics";
@@ -19,12 +19,11 @@ function fieldMessage(name: string, value: string) {
   return "";
 }
 
-export function ContactForm() {
+export function ContactForm({ bookingHref }: { bookingHref: string }) {
   const [status, setStatus] = useState<"idle" | "pending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-  const bookingHref = calUrl() || "#book";
 
   useEffect(() => {
     if (!siteKey || document.querySelector("script[data-turnstile]")) return;

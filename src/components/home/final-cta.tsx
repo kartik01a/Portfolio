@@ -1,12 +1,12 @@
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
-import { calUrl } from "@/content/site";
+import { calUrl } from "@/lib/cal-url";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export function FinalCta() {
-  const bookingHref = calUrl() || "/contact#book";
+export async function FinalCta() {
+  const bookingHref = (await calUrl()) || "/contact#book";
   return (
     <section className="relative overflow-hidden border-t border-border bg-accent py-24 text-accent-foreground">
       <div aria-hidden className="pointer-events-none absolute -top-24 left-1/2 size-[480px] -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />

@@ -1,8 +1,10 @@
 import { TrackedLink } from "@/components/analytics/tracked-link";
-import { calUrl, site } from "@/content/site";
+import { site } from "@/content/site";
+import { calEmbedUrl, calUrl } from "@/lib/cal-url";
 
-export function BookingPanel() {
-  const url = calUrl();
+export async function BookingPanel() {
+  const url = await calUrl();
+  const embedUrl = url ? calEmbedUrl(url) : "";
   return (
     <section id="book" className="scroll-mt-24 rounded-2xl border border-border bg-surface p-6">
       <h2 className="font-display text-3xl">Book a 30-min call</h2>
@@ -19,7 +21,7 @@ export function BookingPanel() {
       </ul>
       {url ? (
         <div className="mt-6 overflow-hidden border border-border">
-          <iframe title="Book a 30-minute call" src={url} className="h-[680px] w-full" />
+          <iframe title="Book a 30-minute call" src={embedUrl} className="h-[680px] w-full" />
         </div>
       ) : (
         <p className="mt-6 text-sm text-secondary">

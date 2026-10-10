@@ -7,7 +7,7 @@ import BrandradarStudy from "@/content/case-studies/brandradar.mdx";
 import MonudeskStudy from "@/content/case-studies/monudesk.mdx";
 import ToolmorphStudy from "@/content/case-studies/toolmorph.mdx";
 import { adjacentProjects, detailProjects, getProject, ownershipLabel, type Project } from "@/content/projects";
-import { calUrl } from "@/content/site";
+import { calUrl } from "@/lib/cal-url";
 import { breadcrumbJsonLd, creativeWorkJsonLd, pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -45,7 +45,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
   const Study = project.caseStudy === "full" ? studies[slug as keyof typeof studies] : null;
   const { previous, next } = adjacentProjects(slug);
-  const bookingHref = calUrl() || "/contact#book";
+  const bookingHref = (await calUrl()) || "/contact#book";
   const jsonLd = [creativeWorkJsonLd(slug), breadcrumbJsonLd(project)].filter(Boolean);
 
   return (

@@ -3,6 +3,7 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { Container } from "@/components/layout/container";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { site } from "@/content/site";
+import { calUrl } from "@/lib/cal-url";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,7 +21,8 @@ const links = [
   { href: site.links.x, label: "X", event: "" },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const bookingHref = (await calUrl()) || "#book";
   return (
     <Container className="py-16">
       <h1 className="font-display text-5xl leading-tight text-ink">Send a project brief.</h1>
@@ -43,7 +45,7 @@ export default function ContactPage() {
         ))}
       </ul>
       <div className="mt-12 grid items-start gap-10 lg:grid-cols-2">
-        <ContactForm />
+        <ContactForm bookingHref={bookingHref} />
         <BookingPanel />
       </div>
     </Container>

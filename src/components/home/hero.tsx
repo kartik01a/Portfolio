@@ -4,12 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { Container } from "@/components/layout/container";
-import { site, calUrl } from "@/content/site";
+import { site } from "@/content/site";
+import { calUrl } from "@/lib/cal-url";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export function Hero() {
-  const bookingHref = calUrl() || "/contact#book";
+export async function Hero() {
+  const bookingHref = (await calUrl()) || "/contact#book";
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div

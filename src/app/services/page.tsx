@@ -8,7 +8,8 @@ import {
   serviceGroups,
   whyPoints,
 } from "@/content/services";
-import { calUrl, site } from "@/content/site";
+import { site } from "@/content/site";
+import { calUrl } from "@/lib/cal-url";
 import { pageMetadata, professionalServiceJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { Boxes, Cable, Cloud, Cpu, LayoutDashboard, type LucideIcon } from "lucide-react";
@@ -29,8 +30,8 @@ const groupIcons: Record<(typeof serviceGroups)[number]["title"], LucideIcon> = 
   "Cloud and delivery": Cloud,
 };
 
-export default function ServicesPage() {
-  const bookingHref = calUrl() || "/contact#book";
+export default async function ServicesPage() {
+  const bookingHref = (await calUrl()) || "/contact#book";
   return (
     <Container className="py-16">
       <p className="font-mono text-xs tracking-wide text-muted uppercase">Services</p>

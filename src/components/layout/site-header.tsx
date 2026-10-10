@@ -2,7 +2,7 @@
 
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
-import { calUrl, site } from "@/content/site";
+import { site } from "@/content/site";
 import { useMounted } from "@/lib/use-mounted";
 import { cn } from "@/lib/utils";
 import { track } from "@vercel/analytics";
@@ -22,7 +22,7 @@ function isCurrent(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function SiteHeader() {
+export function SiteHeader({ bookingHref }: { bookingHref: string }) {
   const pathname = usePathname();
   const [openPath, setOpenPath] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +30,6 @@ export function SiteHeader() {
   const open = openPath === pathname;
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  const bookingHref = calUrl() || "/contact#book";
   const bookingExternal = bookingHref.startsWith("http");
 
   useEffect(() => {

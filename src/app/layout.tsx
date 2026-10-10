@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { site } from "@/content/site";
+import { calUrl } from "@/lib/cal-url";
 import { personJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
@@ -57,7 +58,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const bookingHref = (await calUrl()) || "/contact#book";
   const jsonLd = [personJsonLd(), websiteJsonLd()];
   return (
     <html
@@ -73,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           >
             Skip to content
           </a>
-          <SiteHeader />
+          <SiteHeader bookingHref={bookingHref} />
           <main id="content" className="flex-1">
             {children}
           </main>

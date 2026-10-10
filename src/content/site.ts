@@ -40,7 +40,3 @@ export const site = {
     youtube: "https://www.youtube.com/@letstrycoding6389",
   },
 } as const;
-
-export function calUrl() {
-  return process.env.NEXT_PUBLIC_CAL_URL ?? "";
-}
