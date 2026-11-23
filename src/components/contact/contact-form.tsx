@@ -6,7 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
 import { projectTypes } from "@/lib/validation";
 import { cn } from "@/lib/utils";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 
 const fieldClass =
@@ -60,7 +60,7 @@ export function ContactForm({ bookingHref }: { bookingHref: string }) {
           turnstile.turnstile?.reset();
           if (result.ok) {
             setStatus("sent");
-            track("contact_form_submitted");
+            trackEvent("contact_form_submitted");
             form.reset();
             return;
           }

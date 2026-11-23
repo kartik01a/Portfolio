@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
 import { useMounted } from "@/lib/use-mounted";
 import { cn } from "@/lib/utils";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -97,7 +97,7 @@ export function SiteHeader({ bookingHref }: { bookingHref: string }) {
           target={bookingExternal ? "_blank" : undefined}
           rel={bookingExternal ? "noreferrer" : undefined}
           onClick={() => {
-            track("booking_started");
+            trackEvent("booking_started");
             setOpenPath(null);
           }}
         >
@@ -144,7 +144,7 @@ export function SiteHeader({ bookingHref }: { bookingHref: string }) {
             className={cn(buttonVariants({ variant: "primary" }), "h-10")}
             target={bookingExternal ? "_blank" : undefined}
             rel={bookingExternal ? "noreferrer" : undefined}
-            onClick={() => track("booking_started")}
+            onClick={() => trackEvent("booking_started")}
           >
             Book a 30-min call
           </a>

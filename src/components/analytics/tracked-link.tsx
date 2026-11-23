@@ -1,6 +1,6 @@
 "use client";
 
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import type { ReactNode } from "react";
 
 export function TrackedLink({
@@ -23,7 +23,7 @@ export function TrackedLink({
       className={className}
       target={opensNewTab ? "_blank" : undefined}
       rel={opensNewTab ? "noreferrer" : undefined}
-      onClick={() => track(event)}
+      onClick={() => trackEvent(event)}
     >
       {children}
     </a>

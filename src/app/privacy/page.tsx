@@ -14,9 +14,20 @@ export default function PrivacyPage() {
       <h1 className="font-display text-5xl text-ink">Privacy</h1>
       <div className="mt-8 max-w-2xl space-y-6 text-secondary">
         <p>
-          This site uses cookieless analytics (Vercel Analytics) to count page views and a few events: case study
-          views are covered by page views, plus contact submissions, booking clicks, Upwork clicks, and resume
-          downloads. It does not use a cookie banner and it does not use Google Analytics.
+          This site uses Google Analytics to count visits and page views, and a few events: contact submissions,
+          booking clicks, Upwork clicks, and resume downloads. Google Analytics sets first-party cookies and receives
+          your IP address, browser details, and the pages you visit. Google does not store or log full IP addresses
+          for Google Analytics 4. The data is used only to understand how the site is used. It is not used for
+          advertising, and it is not sold. You can block it with any content blocker or with Google&apos;s{" "}
+          <a
+            href="https://tools.google.com/dlpage/gaoptout"
+            className="text-accent underline underline-offset-4"
+            target="_blank"
+            rel="noreferrer"
+          >
+            opt-out add-on
+          </a>
+          .
         </p>
         <p>
           The contact form sends your name, email, company, project type, optional budget and timeline, and message

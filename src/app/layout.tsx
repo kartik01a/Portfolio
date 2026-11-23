@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { site } from "@/content/site";
+import { readGaId } from "@/lib/analytics";
 import { calUrl } from "@/lib/cal-url";
 import { personJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -60,6 +61,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const bookingHref = (await calUrl()) || "/contact#book";
+  const gaId = readGaId();
   const jsonLd = [personJsonLd(), websiteJsonLd()];
   return (
     <html
@@ -81,9 +83,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           </main>
           <SiteFooter />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <Analytics />
         </ThemeProvider>
       </body>
+      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }
