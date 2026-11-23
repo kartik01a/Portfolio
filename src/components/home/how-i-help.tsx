@@ -17,8 +17,8 @@ const help = [
   },
   {
     title: "AI features",
-    detail: "Dashboards, visualization, and AI workflows on BrandRadar.",
-    href: "/work/brandradar",
+    detail: "An OpenAI triage pipeline with evals on TriageFox, and AI workflows on BrandRadar.",
+    href: "/work/triagefox",
     icon: Cpu,
   },
   {

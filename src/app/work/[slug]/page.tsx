@@ -6,6 +6,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 import BrandradarStudy from "@/content/case-studies/brandradar.mdx";
 import MonudeskStudy from "@/content/case-studies/monudesk.mdx";
 import ToolmorphStudy from "@/content/case-studies/toolmorph.mdx";
+import TriagefoxStudy from "@/content/case-studies/triagefox.mdx";
 import { adjacentProjects, detailProjects, getProject, ownershipLabel, type Project } from "@/content/projects";
 import { calUrl } from "@/lib/cal-url";
 import { breadcrumbJsonLd, creativeWorkJsonLd, pageMetadata } from "@/lib/seo";
@@ -16,6 +17,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const studies = {
+  triagefox: TriagefoxStudy,
   brandradar: BrandradarStudy,
   toolmorph: ToolmorphStudy,
   monudesk: MonudeskStudy,
@@ -106,6 +108,11 @@ export default async function CaseStudyPage({ params }: Props) {
             {project.liveUrl ? (
               <a href={project.liveUrl} className="mt-6 inline-block text-sm text-accent" target="_blank" rel="noreferrer">
                 Visit project
+              </a>
+            ) : null}
+            {project.repoUrl ? (
+              <a href={project.repoUrl} className="mt-3 block text-sm text-accent" target="_blank" rel="noreferrer">
+                Source code
               </a>
             ) : null}
           </aside>

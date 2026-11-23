@@ -31,15 +31,19 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
       ) : (
         body
       )}
-      {project.liveUrl ? (
-        <a
-          href={project.liveUrl}
-          className="mt-3 inline-block text-sm text-ink underline underline-offset-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Visit project
-        </a>
+      {project.liveUrl || project.repoUrl ? (
+        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          {project.liveUrl ? (
+            <a href={project.liveUrl} className="text-ink underline underline-offset-4" target="_blank" rel="noreferrer">
+              Visit project
+            </a>
+          ) : null}
+          {project.repoUrl ? (
+            <a href={project.repoUrl} className="text-ink underline underline-offset-4" target="_blank" rel="noreferrer">
+              Source code
+            </a>
+          ) : null}
+        </div>
       ) : null}
     </div>
   );

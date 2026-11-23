@@ -77,7 +77,7 @@ export default function AboutPage() {
         </h2>
         <p className="mt-4 text-secondary">
           Contributing to Optimate&apos;s production web application, and learning AWS, Kubernetes, and Jenkins,
-          alongside freelance full-stack work. ToolMorph is the independent product.
+          alongside freelance full-stack work. TriageFox and ToolMorph are the independent products.
         </p>
       </section>
 

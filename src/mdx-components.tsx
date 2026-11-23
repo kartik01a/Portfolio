@@ -7,6 +7,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     p: (props) => <p className="mt-4 text-[17px] leading-relaxed text-secondary" {...props} />,
     ul: (props) => <ul className="mt-4 list-disc space-y-2 pl-5 text-secondary" {...props} />,
+    ol: (props) => <ol className="mt-4 list-decimal space-y-2 pl-5 text-secondary" {...props} />,
     a: ({ href, ...props }) => {
       const external = typeof href === "string" && href.startsWith("http");
       return (

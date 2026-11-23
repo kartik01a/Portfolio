@@ -14,6 +14,7 @@ export type Project = {
   featured: boolean;
   technologies: string[];
   liveUrl?: string;
+  repoUrl?: string;
   contribution: string[];
   context?: string;
   decisions?: string[];
@@ -29,6 +30,50 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "triagefox",
+    name: "TriageFox",
+    shortDescription: "Open-source AI support triage SaaS",
+    description:
+      "Built solo: an open-source AI SaaS that reads Crisp support chats and turns the ones that need a code change into prioritized Jira and Trello tickets.",
+    year: "2026",
+    role: "Founder and engineer",
+    ownership: "owned",
+    caseStudy: "full",
+    status: "live",
+    featured: true,
+    updatedAt: "2026-11-23",
+    technologies: ["Next.js", "TypeScript", "BullMQ + Redis", "Postgres + pgvector", "OpenAI APIs", "Docker"],
+    liveUrl: "https://triagefox.com/",
+    repoUrl: "https://github.com/kartik01a/TriageFox",
+    contribution: [
+      "Product, design, and engineering, end to end",
+      "AI triage pipeline with evals",
+      "Jira and Trello integrations",
+      "Multi-tenant security and billing",
+      "Self-hosting package and Docker images",
+    ],
+    context:
+      "Independent, open-source product (AGPL-3.0). Kartik designed, built, and runs TriageFox on his own, from the AI pipeline to hosting and billing.",
+    decisions: [
+      "The web app can save Jira and Trello tokens but never read them back. Only the background worker can decrypt them.",
+      "No chat transcripts are stored. Webhook events are kept as identifiers only.",
+      "One Docker Compose stack serves both the hosted product and self-hosters.",
+    ],
+    challenge: [
+      "Deciding which chats need a code change, and writing a ticket a developer can act on, without inventing details.",
+      "Keeping each customer's data and credentials separate in a multi-tenant SaaS.",
+    ],
+    outcome: [
+      "Live at triagefox.com, tagged v1.0.0, and open source on GitHub.",
+      "Listed in the Crisp Marketplace and available as an Atlassian app for Jira.",
+    ],
+    diagram: ["Crisp chat", "Signed webhook", "BullMQ worker", "OpenAI triage + pgvector duplicates", "Jira and Trello tickets"],
+    confidential: false,
+    seoTitle: "TriageFox, open-source AI that turns support chats into Jira and Trello tickets",
+    seoDescription:
+      "Case study of TriageFox, an open-source AI SaaS Kartik Singh Bisht built solo. It triages Crisp chats into Jira and Trello tickets with Next.js, BullMQ, and Postgres.",
+  },
   {
     slug: "brandradar",
     name: "BrandRadar",

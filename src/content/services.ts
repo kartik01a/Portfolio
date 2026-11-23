@@ -21,7 +21,7 @@ export const serviceGroups = [
       "AI-powered features inside existing products",
       "Structured AI workflows",
     ],
-    note: "BrandRadar is the published AI product work: dashboards and workflows that read LLM responses for brand visibility. ToolMorph's public site treats earlier AI experiments as historical, so this list does not describe a live AI suite there.",
+    note: "TriageFox is the owned AI product: an OpenAI triage pipeline with evals that turns support chats into Jira and Trello tickets. BrandRadar is client AI work: dashboards and workflows that read LLM responses for brand visibility. ToolMorph's public site treats earlier AI experiments as historical, so this list does not describe a live AI suite there.",
   },
   {
     title: "API and integration development",
@@ -98,7 +98,7 @@ export const faqs = [
 ] as const;
 
 export const whyPoints = [
-  "End-to-end work on an independent product (ToolMorph) and a defined scope on client products (BrandRadar, MonuDesk, Inception Financial).",
+  "End-to-end work on independent products (TriageFox, ToolMorph) and a defined scope on client products (BrandRadar, MonuDesk, Inception Financial).",
   "Production SaaS work, described as a contribution where Kartik did not own the product.",
   "Named integrations: QuickBooks and payments on MonuDesk, Google Sheets on Inception Financial.",
   "Cloud delivery that matches shipped work and the resume: AWS, Docker, and GitHub Actions.",

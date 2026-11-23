@@ -7,7 +7,7 @@ export const alt = "Selected work by Kartik Singh Bisht";
 
 export default function Image() {
   return new ImageResponse(
-    <OgCard kicker="Work" title="Selected work" subtitle="BrandRadar, MonuDesk, Optimate, ToolMorph, Inception" />,
+    <OgCard kicker="Work" title="Selected work" subtitle="TriageFox, BrandRadar, MonuDesk, Optimate, ToolMorph" />,
     size,
   );
 }

@@ -8,7 +8,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 export const metadata = pageMetadata({
   title: "Work",
   description:
-    "Selected products by Kartik Singh Bisht: ToolMorph, MonuDesk, BrandRadar, Optimate, and Inception Financial, with ownership labeled on every project.",
+    "Selected products by Kartik Singh Bisht: TriageFox, BrandRadar, MonuDesk, Optimate, ToolMorph, and Inception Financial, with ownership labeled on every project.",
   path: "/work",
 });
 

@@ -22,7 +22,6 @@ export function ProjectCover({
   priority?: boolean;
 }) {
   const cover = coverFile(project);
-  console.log(cover,"cover")
   return (
     <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
       <div className="relative aspect-[16/9] overflow-hidden bg-muted-surface">

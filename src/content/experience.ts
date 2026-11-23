@@ -21,7 +21,7 @@ export const experience: ExperienceRole[] = [
       "Third-party integrations",
       "Production releases",
     ],
-    projectSlugs: ["brandradar", "monudesk", "optimate", "toolmorph"],
+    projectSlugs: ["triagefox", "brandradar", "monudesk", "optimate", "toolmorph"],
   },
   {
     role: "Associate software developer",

@@ -1,0 +1,62 @@
+## Context and constraints
+
+TriageFox is an independent, open-source product that I designed and built solo. I also run it. The hosted version is live at [triagefox.com](https://triagefox.com/), and the code is public on [GitHub](https://github.com/kartik01a/TriageFox) under AGPL-3.0. There is no client and no team. The budget was close to zero, so the hosting choices had to be cheap without being fragile.
+
+## The problem
+
+Support teams hear about bugs in chat first. Then someone has to copy the conversation into Jira or Trello by hand, guess a priority, rewrite it as steps to reproduce, attach the screenshot, and check whether another customer already reported the same thing. Most of that work gets skipped, or done badly.
+
+## What I built
+
+An AI SaaS that reads Crisp conversations and turns the ones that need a code change into tickets in Jira and Trello. Questions like "how do I reset my password?" never become tickets.
+
+- **Writes the ticket.** A title, a summary, steps to reproduce, expected and actual behavior, and the screenshots and files the customer sent. Voice notes are transcribed.
+- **Classifies and prioritizes.** Each ticket gets a type (bug, UI problem, feature request, performance) and a priority from 1 to 5 on a fixed rubric. The priority maps to Jira priorities and Trello label colors.
+- **Follows the conversation.** When the customer adds details later, the same ticket gets a comment instead of a new ticket. Edits made by hand are never overwritten.
+- **Merges duplicates.** When a second customer reports the same bug, the first ticket shows "Reported by 2 customers" instead of a copy.
+- **Keeps people in control.** An activity log explains every decision, unsure tickets wait in a review queue, and a dry run tries it on the last 10 conversations before it goes live.
+
+## How it works
+
+1. Crisp sends a signed webhook when a message arrives. TriageFox stores only the identifiers and waits about three minutes for the customer to stop typing.
+2. A BullMQ worker re-reads the conversation from Crisp. It embeds the customer's words and uses pgvector to find similar open tickets.
+3. An OpenAI model decides whether to create a ticket, update one, mark a duplicate, or do nothing. The model has no tools, and its answer must pass a strict schema.
+4. The ticket goes to every connected destination, or the existing ticket gets an update.
+
+## Engineering highlights
+
+- **Sealed-box encryption.** Jira and Trello tokens are encrypted to a key pair whose private half only the background worker has. The web app can save a token but never read it back, so a bug in a web route cannot leak credentials.
+- **Row-level security.** Each workspace is isolated in the data-access layer, and again with Postgres row-level security as a second lock.
+- **No chat transcripts stored.** Webhook events are kept as identifiers only, logs are redacted, and the AI's working notes are encrypted.
+- **Duplicate detection.** Embeddings and pgvector shortlist the five closest open tickets, and the model confirms or rejects the match. It can only point to a ticket it was given.
+- **AI evals.** 156 labelled conversations cover bugs, feature requests, priorities, dates, prompt injection, images, and non-English chats. I run them before any prompt, rubric, or model change. The targets are 90%+ accuracy on ticket versus no ticket, 85%+ on type, 85%+ on priority within one level, and zero invented due dates.
+- **Self-hosting.** One Docker Compose stack with ready-made images for Intel and ARM. A setup script generates every secret without printing it. The [self-host guide](https://github.com/kartik01a/TriageFox/blob/main/docs/self-hosting.md) covers the rest.
+
+## Stack
+
+A TypeScript monorepo with two apps (web and worker) and nine packages. Next.js, BullMQ and Redis, Postgres with pgvector, Drizzle, Better Auth, and OpenAI. It runs in Docker on Oracle Cloud behind Cloudflare, with billing through a merchant of record.
+
+## My role
+
+All of it: product direction, design, the AI pipeline, the integrations, security, billing, infrastructure, documentation, and the marketplace listings.
+
+## Key decisions
+
+- **One server, one Compose file.** The worker has to run all the time for queues, debouncing, and reconciliation, which rules out scale-to-zero platforms on this budget. The same Compose file is the self-host package.
+- **The model decides, the code acts.** The AI returns a structured decision and nothing else. Code creates the tickets, so the model never gets write access to anything.
+- **Open source under AGPL-3.0.** Anyone can self-host it for free. The hosted version is the business.
+- **Write the decisions down.** 16 architecture decision records cover choices such as the hosting model, the security architecture, and billing.
+
+## Challenges
+
+The hard part is judgement, not plumbing: telling a real bug from a how-to question, choosing a priority people agree with, and never inventing a due date the customer did not give. The evals exist so that I can change the prompt without guessing whether it got better or worse.
+
+The other challenge is trust. Customers connect their Jira and Trello accounts, so credential handling, tenant isolation, and not keeping transcripts were designed in from the start, not added at the end.
+
+## Outcome
+
+TriageFox is in production at triagefox.com and tagged v1.0.0. It is listed in the Crisp Marketplace and available as an Atlassian app for Jira.
+
+- About 36,500 lines of TypeScript across 2 apps and 9 packages
+- 47 test files and 16 architecture decision records
+- 110+ commits, all open source

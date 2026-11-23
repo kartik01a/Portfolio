@@ -6,7 +6,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { briefSchema } from "@/lib/validation";
 import { describe, expect, it, vi } from "vitest";
 
-const featuredOrder = ["brandradar", "monudesk", "optimate", "toolmorph", "inception-financial"];
+const featuredOrder = ["triagefox", "brandradar", "monudesk", "optimate", "toolmorph", "inception-financial"];
 
 describe("briefSchema", () => {
   const valid = {
